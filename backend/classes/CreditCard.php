@@ -18,7 +18,7 @@ class CreditCard {
     }
 
     public function setExpiry($_month, $_year) {
-        if (!is_numeric($_month) || !is_numeric($_year) || $_month > 31) {
+        if (!is_numeric($_month) || !is_numeric($_year) || $_month > 12) {
             throw new Exception("Data di scadenza non valida\n");
         } else {
             $_expiry = "{$_month}-20{$_year}";
