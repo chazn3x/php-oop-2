@@ -17,127 +17,30 @@
         <!-- Header -->
         <header class="header">
             <h1 class="title">Online Shop</h1>
-            <select name="users" id="">
-                <option value="user1">User 1</option>
-                <option value="user2">User 2</option>
-                <option value="user3">User 3</option>
-            </select>
+            <div class="utenti">
+                <label for="users">Utenti</label>
+                <select v-model="user" @change="userChange()" id="users">
+                    <option v-for="(user, index) in users" :value="index">{{user.name}} {{user.surname}}</option>
+                </select>
+            </div>
         </header>
         <!-- Main -->
         <main class="container">
             <!-- Categorie -->
             <div class="categories">
-                <section class="category">
-                    <h2>Categoria 1</h2>
+                <section class="category" v-for="categories in products">
+                    <h2>{{categories.category}}</h2>
                     <!-- Prodotti -->
                     <div class="products">
-                        <div class="product">
+                        <div class="product" v-for="product in categories.listOfProducts">
                             <!-- immagine -->
-                            <div class="product-image"></div>
+                            <div class="product-image">
+                                <img src="./images/placeholder.jpeg" alt="">
+                            </div>
                             <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                    </div>
-                </section>
-                <section class="category">
-                    <h2>Categoria 2</h2>
-                    <!-- Prodotti -->
-                    <div class="products">
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                    </div>
-                </section>
-                <section class="category">
-                    <h2>Categoria 3</h2>
-                    <!-- Prodotti -->
-                    <div class="products">
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
-                        </div>
-                        <div class="product">
-                            <!-- immagine -->
-                            <div class="product-image"></div>
-                            <!-- titolo -->
-                            <h4 class="product-title">Titolo prodotto</h4>
-                            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, dolorem.</p>
-                            <p class="product-price">9,99€</p>
+                            <h4 class="product-title">{{product.name}} {{product.brand}}</h4>
+                            <p class="product-description">{{product.description}}</p>
+                            <p class="product-price">{{product.discount == 0 ? product.price : Math.round((product.price - (product.price / 100 * product.discount)) * 100) / 100}}</p>
                         </div>
                     </div>
                 </section>

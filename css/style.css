@@ -60,10 +60,21 @@ body {
 .categories .category .products .product-image {
   width: 100%;
   height: 200px;
-  background-color: white;
   -webkit-box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.1);
           box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
+  position: relative;
+}
+
+.categories .category .products .product-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
 }
 
 .categories .category .products .product-description {
