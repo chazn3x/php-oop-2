@@ -3,7 +3,8 @@ const app = new Vue({
     data: {
         users: null,
         products: [],
-        user: null
+        user: 0,
+        product: null
     },
     methods: {
         userChange() {
@@ -15,7 +16,6 @@ const app = new Vue({
                 }
             })
             .then(response => {
-                console.log(response.data);
                 this.products.push({
                     category: 'Abbigliamento',
                     listOfProducts: response.data
@@ -28,7 +28,6 @@ const app = new Vue({
                 }
             })
             .then(response => {
-                console.log(response.data);
                 this.products.push({
                     category: 'Tecnologia',
                     listOfProducts: response.data
@@ -41,19 +40,21 @@ const app = new Vue({
                 }
             })
             .then(response => {
-                console.log(response.data);
                 this.products.push({
                     category: 'Articoli per la casa',
                     listOfProducts: response.data
                 })
             })
+        },
+        buyProduct(product) {
+            document.querySelector('.buy-card').style.display = 'block'
+            this.product = product
         }
     },
     beforeCreate() {
         // Get users
         axios.get('backend/users.php')
         .then(response => {
-            console.log(response.data);
             this.users = response.data
         })
 
@@ -65,7 +66,6 @@ const app = new Vue({
             }
         })
         .then(response => {
-            console.log(response.data);
             this.products.push({
                 category: 'Abbigliamento',
                 listOfProducts: response.data
@@ -78,7 +78,6 @@ const app = new Vue({
             }
         })
         .then(response => {
-            console.log(response.data);
             this.products.push({
                 category: 'Tecnologia',
                 listOfProducts: response.data
@@ -91,11 +90,15 @@ const app = new Vue({
             }
         })
         .then(response => {
-            console.log(response.data);
             this.products.push({
                 category: 'Articoli per la casa',
                 listOfProducts: response.data
             })
+        })
+    },
+    created() {
+        window.addEventListener('click', () => {
+            document.querySelector('.buy-card').style.display = 'none'
         })
     }
 })

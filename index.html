@@ -32,7 +32,7 @@
                     <h2>{{categories.category}}</h2>
                     <!-- Prodotti -->
                     <div class="products">
-                        <div class="product" v-for="product in categories.listOfProducts">
+                        <div class="product" v-for="product in categories.listOfProducts" @click.stop="buyProduct(product)">
                             <!-- immagine -->
                             <div class="product-image">
                                 <img src="./images/placeholder.jpeg" alt="">
@@ -40,10 +40,31 @@
                             <!-- titolo -->
                             <h4 class="product-title">{{product.name}} {{product.brand}}</h4>
                             <p class="product-description">{{product.description}}</p>
-                            <p class="product-price">{{product.discount == 0 ? product.price : Math.round((product.price - (product.price / 100 * product.discount)) * 100) / 100}}</p>
+                            <span class="product-price" :class="{'old-price': product.discount > 0}">{{product.price}}</span>
+                            <span v-if="product.discount > 0" class="discounted-price">{{Math.round((product.price - (product.price / 100 * product.discount)) * 100) / 100}}</span>
                         </div>
                     </div>
                 </section>
+            </div>
+            <!-- Buy card -->
+            <div class="buy-card" @click.stop>
+                <div v-if="product" class="product-info">
+                    <h3>{{product.name}} {{product.brand}}</h3>
+                    <p>{{product.description}}</p>
+                    <span :class="{'old-price': product.discount > 0}">{{product.price}}</span>
+                    <span v-if="product.discount > 0" class="discounted-price">{{Math.round((product.price - (product.price / 100 * product.discount)) * 100) / 100}}</span>
+                </div>
+                <div class="credit-card">
+                    <form action="./backend/buy.php" method="post" class="buy-form">
+                        <label for="cc-num">Numero carta</label>
+                        <input type="text" id="cc-num" name="cardNumber" required maxlength="16"><br>
+                        <label for="expiry">Scadenza</label>
+                        <input style="width: 30px" type="text" id="expiry" name="month" maxlength="2" placeholder="01" required> / <input style="width: 30px" type="text" id="expiry" name="year" maxlength="2" placeholder="01" required><br>
+                        <label for="cvv">CVV</label>
+                        <input style="width: 50px" type="text" id="cvv" name="cvv" required maxlength="3">
+                        <button type="submit">Compra</button>
+                    </form>
+                </div>
             </div>
         </main>
     </div>

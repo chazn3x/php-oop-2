@@ -55,6 +55,7 @@ body {
   -ms-flex-negative: 0;
       flex-shrink: 0;
   margin: 1rem;
+  cursor: pointer;
 }
 
 .categories .category .products .product-image {
@@ -77,6 +78,10 @@ body {
   z-index: -1;
 }
 
+.categories .category .products .product-title {
+  text-transform: capitalize;
+}
+
 .categories .category .products .product-description {
   line-height: 1.2rem;
   letter-spacing: .5px;
@@ -85,5 +90,52 @@ body {
 
 .categories .category .products .product-price {
   font-weight: bold;
+}
+
+.categories .category .products .product-price.old-price {
+  text-decoration: line-through;
+}
+
+.categories .category .products .product .discounted-price {
+  font-weight: bold;
+  color: red;
+}
+
+.buy-card {
+  border-radius: 1rem;
+  position: fixed;
+  width: 500px;
+  height: 400px;
+  background-color: #fff;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 1rem;
+  display: none;
+}
+
+.buy-card .product-info {
+  margin-bottom: 1rem;
+}
+
+.buy-card .product-info h3 {
+  text-transform: capitalize;
+}
+
+.buy-card .product-info span {
+  font-weight: bold;
+}
+
+.buy-card .product-info span.old-price {
+  text-decoration: line-through;
+}
+
+.buy-card .product-info span.discounted-price {
+  color: red;
+}
+
+.buy-card input {
+  margin-bottom: 1rem;
 }
 /*# sourceMappingURL=style.css.map */
